@@ -1,30 +1,17 @@
-function CalculateBill() {
-    var theCallCost = 0;
-    var theSmsCost = 0;
-    
-    function setCallCost(callCost) {
-        theCallCost = callCost;
-    }
+function totalPhoneBill(billString) {
 
-    function getCallCost() {
-        return theCallCost;
-    }
+    var billTotal = 0;
 
-    function setSmsCost(smsCost) {
-        theSmsCost = smsCost;
-    }
+    for (var i = 0; i < billString.length; i++) {
+        var billItem = billString[i].trim();
 
-    function getSmsCost() {
-        return theSmsCost;
-    }
+        if (billItem === "call") {
+            billTotal += 2.75;
+        }
 
-    return {
-       
-        setCallCost,
-        getCallCost,
-        setSmsCost,
-        getSmsCost,
-       
+        else if (billItem === "sms") {
+            billTotal += 0.75;
+        }
     }
-
+    return billTotal
 }

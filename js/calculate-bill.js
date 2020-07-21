@@ -1,74 +1,48 @@
-//get a reference to the calculate button
+// get a reference to the sms or call radio buttons
 
-//get a reference to the billTotal element
+// get refences to all the settings fields
 
-//get a reference to the billString
+//get a reference to the add button
 
-//create the function that will be called when the calculate button is pressed
-//  * this function should read the string value entered - split it on a comma.
-//  * loop over all the entries in the the resulting list
-//  * check if it is a call or an sms and add the right amount to the overall total
-//  * once done looping over all the entries - display the total onto the screen in the billTotal element
+//get a reference to the 'Update settings' button
 
-//link the function to a click event on the calculate button
+// create a variables that will keep track of all the settings
+
+// create a variables that will keep track of all three totals.
+
+//add an event listener for when the 'Update settings' button is pressed
+
 
 const calculateBtn = document.querySelector(".calculateBtn");
 
 const billTotalElement = document.querySelector(".billTotal");
 
-const billStringField = document.querySelector(".billString");
+const billStringFieldElem = document.querySelector(".billString");
 
 const billTotalSpanElement = document.querySelector(".total");
 
-function totalPhoneBill(billString) {
+var currentTotal =  totalPhoneBill(billStringFieldElem.value)
 
-var billItems = billString.split(",");
-
-var billTotal = 0;
-
-for (var i=0;i<billItems.length;i++){
-var billItem = billItems[i].trim();
-
-if (billItem === "call"){
-billTotal += 2.75;
-}
-
-else if (billItem === "sms"){ 
-billTotal += 0.75;
-}
-
-}
-
-var roundedBillTotal = billTotal.toFixed(2);
-return roundedBillTotal;
-}
-
-function styleTotalColor(roundedBillTotal) {
-
-const currentTotal = Number(roundedBillTotal);
-
-billTotalSpanElement.classList.remove("danger");
-billTotalSpanElement.classList.remove("warning");
-
-if (currentTotal >= 30) {
-billTotalSpanElement.classList.add("danger");
-}
-else if (currentTotal >= 20 && currentTotal < 30) {
-billTotalSpanElement.classList.add("warning");
-}
-}
 
 function calculateBtnClicked() {
 
-var billString = billStringField.value;
+var billString = billStringFieldElem.value;
 
-const roundedBillTotal = totalPhoneBill(billString);
+var list = billString.split(',')
 
+const roundedBillTotal = totalPhoneBill(list);
 
+billTotalElement.classList.remove("critical");
+billTotalElement.classList.remove("warning");
 
-billTotalElement.innerHTML = roundedBillTotal;
+if ( roundedBillTotal >= 30) {
+    billTotalElement.classList.add("critical");
+}
+else if (roundedBillTotal >= 20 &&  roundedBillTotal< 30) {
+    billTotalElement.classList.add("warning");
+}
 
-styleTotalColor(roundedBillTotal);
+billTotalElement.innerHTML = roundedBillTotal.toFixed(2);
 
 }
 

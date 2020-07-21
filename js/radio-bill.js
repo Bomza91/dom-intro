@@ -1,15 +1,3 @@
-// get a reference to the sms or call radio buttons
-
-//get a reference to the add button
-
-//create a variable that will keep track of the total bill
-
-//add an event listener for when the add button is pressed
-
-//in the event listener get the value from the billItemTypeRadio radio buttons
-// * add the appropriate value to the running total
-// * add nothing for invalid values that is not 'call' or 'sms'.
-// * display the latest total on the screen
 
 const billItemTypeRadio = document.querySelector(".billItemTypeRaidio");
 
@@ -45,27 +33,24 @@ function radioBill() {
     //      Total += 0.75;
     // }
 
-    callTotalTwo.innerHTML = radioBillInstance.getCallCost().toFixed(2)
-    smsTotalTwo.innerHTML = radioBillInstance.getSmsCost().toFixed(2)
-    totalTwo.innerHTML = radioBillInstance.getTotalCost().toFixed(2)
-    styleTotalColor();
+    callTotalTwo.innerHTML = radioBillInstance.getCallTotal();
+    smsTotalTwo.innerHTML = radioBillInstance.getSmsTotal();
+    totalTwo.innerHTML = radioBillInstance.getTotal();
+    totalTwo.classList.add(radioBillInstance.styleTotalColor());
+
 }
 
 function styleTotalColor() {
 
     totalTwo.classList.remove("danger")
     totalTwo.classList.remove("warning")
+    totalTwo.classList.add(radioBillInstance.totalClassName());
 
     var currentStyle = radioBillInstance.styleTotalColor();
     totalTwo.classList.add(currentStyle);
 
-    // if (Total >= 50) {
-    //     totalT.classList.add("danger")
-    // } else if (Total >= 30 && Total <= 50) {
-    //     totalT.classList.add("warning")
-    // }
-}
 
+}
 
 billRadioBtn.addEventListener('click', radioBill);
 

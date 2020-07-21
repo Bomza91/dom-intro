@@ -1,44 +1,44 @@
 describe("The radio bill button factory function", function () {
     it("should be able to set call cost", function () {
-        let radioBtn = radioBill();
+        let radioBtn = RadioBill();
 
-        radioBtn.setCallCost(2.75);
-        assert.equal(2.75, radioBtn.getCallCost());
+        radioBtn.radioButtons('call');
+        assert.equal(2.75, radioBtn.getCallTotal());
 
-        let radioBtn2 = radioBill();
-        radioBtn2.setCallCost(1.85);
-        assert.equal(1.85, radioBtn2.getCallCost());
+        let radioBtn2 = RadioBill();
+        radioBtn.radioButtons('call');
+        assert.equal(0, radioBtn2.getCallTotal());
     })
 
 
     it("should be able to set sms cost", function () {
-        let radioBtn = radioBill();
+        let radioBtn = RadioBill();
+        radioBtn.radioButtons('sms');
+        
+        assert.equal(0.75, radioBtn.getSmsTotal());
 
-        radioBtn.setSmsCost(0.75);
-        assert.equal(0.75, radioBtn.getSmsCost());
-
-        let radioBtn2 = radioBill();
-        radioBtn2.setSmsCost(0.65);
-        assert.equal(0.65, radioBtn2.getSmsCost());
+        let radioBtn2 = RadioBill();
+        radioBtn2.radioButtons(0.65);
+        assert.equal(0, radioBtn2.getSmsTotal());
     })
 
     it("should be able to set warning level", function () {
 
-        let radioBtn = radioBill();
+        let radioBtn = RadioBill();
 
-        radioBtn.setWarningLevel(30);
+        radioBtn.styleTotalColor(30);
 
-        assert.equal(30, radioBtn.getWarningLevel());
+        assert.equal(0, radioBtn.getTotal());
 
     })
 
     it("should be able to set danger level", function () {
 
-        let radioBtn = radioBill();
+        let radioBtn = RadioBill();
 
-        radioBtn.setDangerLevel(50);
+        radioBtn.styleTotalColor(50);
 
-        assert.equal(50, radioBtn.getDangerLevel());
+        assert.equal(0, radioBtn.getTotal());
 
     })
 
@@ -47,35 +47,42 @@ describe("The radio bill button factory function", function () {
 
 describe("use values", function () {
     it("should be able to make calls", function () {
-        let radioBtn = radioBill();
+        let radioBtn = RadioBill();
 
-        radioBtn.setCallCost(2.75);
-        radioBtn.setSmsCost(0.75);
-        radioBtn.setWarningLevel(30);
-        radioBtn.setDangerLevel(50);
+        radioBtn.radioButtons(2.75);
+        radioBtn.radioButtons(0.75);
+        radioBtn.styleTotalColor(30);
+        radioBtn.styleTotalColor(50);
 
-        radioBtn.makeCall();
-        radioBtn.makeCall();
-
-        assert.equal(5.50, radioBtn.getTotalCost());
-        assert.equal(5.50, radioBtn.getTotalCallCost());
-        assert.equal(0.00, radioBtn.getTotalSmsCost());
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call'); 
+        radioBtn.radioButtons('call');
+        
+        assert.equal(19.25, radioBtn.getTotal());
+        assert.equal(19.25, radioBtn.getCallTotal());
+        assert.equal(0.00, radioBtn.getSmsTotal());
     })
 
     it("should be able to send sms's", function () {
-        let radioBtn = radioBill();
+        let radioBtn = RadioBill();
 
-        radioBtn.setCallCost(2.75);
-        radioBtn.setSmsCost(0.75);
-        radioBtn.setWarningLevel(30);
-        radioBtn.setDangerLevel(50);
+        radioBtn.radioButtons(2.75);
+        radioBtn.radioButtons(0.75);
+        radioBtn.styleTotalColor(30);
+        radioBtn.styleTotalColor(50);
 
-        radioBtn.sendSms();
-        radioBtn.sendSms();
-
-        assert.equal(1.50, radioBtn.getTotalCost());
-        assert.equal(0.00, radioBtn.getTotalCallCost());
-        assert.equal(1.50, radioBtn.getTotalSmsCost());
+        radioBtn.radioButtons('sms');
+        radioBtn.radioButtons('sms');
+        radioBtn.radioButtons('sms');
+        radioBtn.radioButtons('sms');
+     
+        assert.equal(3, radioBtn.getTotal());
+        assert.equal(0.00, radioBtn.getCallTotal());
+        assert.equal(3, radioBtn.getSmsTotal());
     })
 });
 
@@ -83,87 +90,122 @@ describe("use values", function () {
 describe("warning & danger level", function () {
 
     it("it should return a class name of 'warning' if warning level is reached", function () {
-        let radioBtn = radioBill();
+        let radioBtn = RadioBill();
 
-        radioBtn.setCallCost(10.00);
-        radioBtn.setSmsCost(5.00);
-        radioBtn.setWarningLevel(30);
-        radioBtn.setDangerLevel(50);
+     
 
-        radioBtn.makeCall();
-        radioBtn.makeCall();
-        
-        
-        
-        radioBtn.sendSms();
-        radioBtn.sendSms();
-        radioBtn.sendSms();
-        
-
-        assert.equal("warning", radioBtn.totalClassName());
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call'); 
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+       
+       
+    
+        assert.equal("warning", radioBtn.styleTotalColor());
 
     })
 
     it("it should return a class name of 'danger' if danger level is reached", function () {
-        let radioBtn = radioBill();
-
-        radioBtn.setCallCost(10.00);
-        radioBtn.setSmsCost(5.00);
-        radioBtn.setWarningLevel(30);
-        radioBtn.setDangerLevel(50);
-
-        radioBtn.makeCall();
-        radioBtn.makeCall();
-        radioBtn.makeCall();
-        radioBtn.makeCall();
+        let radioBtn = RadioBill();
        
-        radioBtn.sendSms();
-        radioBtn.sendSms();
-        radioBtn.sendSms();
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call'); 
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+       
        
 
-        assert.equal("danger", radioBtn.totalClassName());
+        assert.equal("critical", radioBtn.styleTotalColor());
     })
 
     it("it should allow the total to increase after reaching the warning level", function () {
-        let radioBtn = radioBill();
+        let radioBtn = RadioBill();
 
-        radioBtn.setCallCost(20.00);
-        radioBtn.setSmsCost(10.00);
-        radioBtn.setWarningLevel(30);
-        radioBtn.setDangerLevel(50);
 
-        radioBtn.makeCall();
-        
-        
-        radioBtn.sendSms();
-        radioBtn.sendSms();
+
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+
         
 
-        assert.equal(20.00, radioBtn.getTotalCallCost());
-        assert.equal(20.00, radioBtn.getTotalSmsCost());
-        assert.equal("warning", radioBtn.totalClassName());
+        assert.equal(41.25, radioBtn.getCallTotal());
+        assert.equal("warning", radioBtn.styleTotalColor());
+       
+        radioBtn.radioButtons('call');
+        
+        assert.equal(44, radioBtn.getCallTotal());
+        assert.equal("warning", radioBtn.styleTotalColor());
 
     });
 
 
-    it("it should stop the total cost from increasing when the danger level has been reached", function () {
-        let radioBtn = radioBill();
+    it("it should return critical if the total more than fifty", function () {
+        let radioBtn = RadioBill();
 
-        radioBtn.setCallCost(20.00);
-        radioBtn.setSmsCost(10.00);
-        radioBtn.setWarningLevel(30);
-        radioBtn.setDangerLevel(50);
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
+        radioBtn.radioButtons('call');
 
-        radioBtn.makeCall();
-        radioBtn.makeCall();
-      
+        assert.equal(57.75, radioBtn.getCallTotal());
         
-        radioBtn.sendSms();
-        
-        assert.equal(40, radioBtn.getTotalCallCost());
-        assert.equal(10, radioBtn.getTotalSmsCost());
-        assert.equal("danger", radioBtn.totalClassName());
+        assert.equal("critical", radioBtn.styleTotalColor());
 
     });
 });

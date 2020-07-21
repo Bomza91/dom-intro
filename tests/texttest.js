@@ -3,32 +3,28 @@ describe("The text input bill factory function", function () {
     it("should be able to enter call cost", function () {
         let textBill = TextInputBill();
 
-        textBill.setCallCost(2.75);
-        assert.equal(2.75, textBill.getCallCost());
+        textBill.billTotal('call');
+        assert.equal(2.75, textBill.getCallTotal());
 
-        let textBill2 = TextInputBill();
-        textBill2.setCallCost(1.85);
-        assert.equal(1.85, textBill2.getCallCost());
+      
     })
 
     it("should be able to enter sms cost", function () {
         let textBill = TextInputBill();
 
-        textBill.setSmsCost(0.75);
-        assert.equal(0.75, textBill.getSmsCost());
+        textBill.billTotal('sms');
+        assert.equal(0.75, textBill.getSmsTotal());
 
-        let textBill2 = TextInputBill();
-        textBill2.setSmsCost(0.65);
-        assert.equal(0.65, textBill2.getSmsCost());
+       
     })
 
     it("should be able to set warning level", function () {
 
         let textBill = TextInputBill();
 
-        textBill.setWarningLevel(30);
+        textBill.styleTotalColor(30);
 
-        assert.equal(30, textBill.getWarningLevel());
+        assert.equal(0, textBill.getTotal());
 
     })
 
@@ -36,9 +32,9 @@ describe("The text input bill factory function", function () {
 
         let textBill = TextInputBill();
 
-        textBill.setDangerLevel(50);
+        textBill.styleTotalColor(50);
 
-        assert.equal(50, textBill.getDangerLevel());
+        assert.equal(0, textBill.getTotal());
 
     })
 
@@ -49,36 +45,30 @@ describe("use values", function () {
     it("should be able to make calls", function () {
         let textBill = TextInputBill();
 
-        textBill.setCallCost(2.75);
-        textBill.setSmsCost(0.75);
-        textBill.setWarningLevel(30);
-        textBill.setDangerLevel(50);
 
-        textBill.makeCall();
-        textBill.makeCall();
-        textBill.makeCall();
-        textBill.makeCall();
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
 
 
-        assert.equal(11.00, textBill.getTotalCost());
-        assert.equal(11.00, textBill.getTotalCallCost());
-        assert.equal(0.00, textBill.getTotalSmsCost());
+        assert.equal(11, textBill.getTotal());
+        assert.equal(11, textBill.getCallTotal());
+        assert.equal(0.00, textBill.getSmsTotal());
     })
 
     it("should be able to send sms's", function () {
         let textBill = TextInputBill();
 
-        textBill.setCallCost(2.75);
-        textBill.setSmsCost(0.75);
-        textBill.setWarningLevel(30);
-        textBill.setDangerLevel(50);
+        
+        textBill.billTotal('sms');
+        textBill.billTotal('sms');
+        textBill.billTotal('sms');
+        textBill.billTotal('sms');     
 
-        textBill.sendSms();
-        textBill.sendSms();
-
-        assert.equal(1.50, textBill.getTotalCost());
-        assert.equal(0.00, textBill.getTotalCallCost());
-        assert.equal(1.50, textBill.getTotalSmsCost());
+        assert.equal(3.00, textBill.getTotal());
+        assert.equal(0.00, textBill.getCallTotal());
+        assert.equal(3.00, textBill.getSmsTotal());
     })
 });
 
@@ -88,73 +78,81 @@ describe("warning & danger level", function () {
     it("it should return a class name of 'warning' if warning level is reached", function () {
         let textBill = TextInputBill();
 
-        textBill.setCallCost(5.00);
-        textBill.setSmsCost(2.00);
-        textBill.setWarningLevel(30);
-        textBill.setDangerLevel(50);
 
-        textBill.makeCall();
-        textBill.makeCall();
-        textBill.makeCall();
-        textBill.makeCall();
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');        
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
         
-        
-        textBill.sendSms();
-        textBill.sendSms();
-        textBill.sendSms();
-        textBill.sendSms();
-        textBill.sendSms();
 
-        assert.equal("warning", textBill.totalClassName());
+
+        assert.equal("warning", textBill.styleTotalColor());
 
     })
 
     it("it should return a class name of 'danger' if danger level is reached", function () {
         let textBill = TextInputBill();
 
-        textBill.setCallCost(5.00);
-        textBill.setSmsCost(2.00);
-        textBill.setWarningLevel(30);
-        textBill.setDangerLevel(50);
-
-        textBill.makeCall();
-        textBill.makeCall();
-        textBill.makeCall();
-        textBill.makeCall();
-        textBill.makeCall();
-        textBill.makeCall();
-        textBill.makeCall();
-        textBill.makeCall();
-        
-        textBill.sendSms();
-        textBill.sendSms();
-        textBill.sendSms();
-        textBill.sendSms();
-        textBill.sendSms();
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');        
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+      
        
-        assert.equal("danger", textBill.totalClassName());
+        assert.equal("critical", textBill.styleTotalColor());
     })
 
     it("it should allow the total to increase after reaching the warning level", function () {
         let textBill = TextInputBill();
 
-        textBill.setCallCost(10);
-        textBill.setSmsCost(5.00);
-        textBill.setWarningLevel(30);
-        textBill.setDangerLevel(50);
+       
 
-        textBill.makeCall();
-        textBill.makeCall();
-        
-        
-        textBill.sendSms();
-        textBill.sendSms();
-        textBill.sendSms();
-        
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
 
-        assert.equal(20.00, textBill.getTotalCallCost());
-        assert.equal(15.00, textBill.getTotalSmsCost());
-        assert.equal("warning", textBill.totalClassName());
+        assert.equal(33, textBill.getCallTotal());
+        assert.equal(0, textBill.getSmsTotal());
+        assert.equal("warning", textBill.styleTotalColor());
         
     });
 
@@ -162,25 +160,32 @@ describe("warning & danger level", function () {
     it("it should stop the total cost from increasing when the danger level has been reached", function () {
         let textBill = TextInputBill();
 
-        textBill.setCallCost(10.00);
-        textBill.setSmsCost(5.00);
-        textBill.setWarningLevel(30);
-        textBill.setDangerLevel(50);
-
-        textBill.makeCall();
-        textBill.makeCall();
-        textBill.makeCall();
-        textBill.makeCall();
-        
-        
-        textBill.sendSms();
-        textBill.sendSms();
-        
         
 
-        assert.equal(40.00, textBill.getTotalCallCost());
-        assert.equal(10.00, textBill.getTotalSmsCost());
-        assert.equal("danger", textBill.totalClassName());
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call')
+        textBill.billTotal('call')
+        
+
+        assert.equal(52.25, textBill.getCallTotal());
+        assert.equal(0, textBill.getSmsTotal());
+        assert.equal("critical", textBill.styleTotalColor());
 
     });
 });
