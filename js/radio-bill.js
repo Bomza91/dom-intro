@@ -11,9 +11,7 @@ const totalTwo = document.querySelector(".totalTwo");
 
 var radioBillInstance = RadioBill();
 
-// var totalCalls = 0;
-// var totalSms = 0;
-// var Total = 0;
+
 
 
 function radioBill() {
@@ -23,16 +21,7 @@ function radioBill() {
 
     radioBillInstance.radioButtons(billItemType);
 
-    // console.log(billItemType)
-    // if (billItemType === 'call') {
-    //     totalCalls += 2.75;
-    //     Total += 2.75;
-    // }
-    //  else if ( billItemType === 'sms'){
-    //      totalSms += 0.75;
-    //      Total += 0.75;
-    // }
-
+   
     callTotalTwo.innerHTML = radioBillInstance.getCallTotal();
     smsTotalTwo.innerHTML = radioBillInstance.getSmsTotal();
     totalTwo.innerHTML = radioBillInstance.getTotal();

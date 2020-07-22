@@ -1,16 +1,3 @@
-// get a reference to the sms or call radio buttons
-
-// get refences to all the settings fields
-
-//get a reference to the add button
-
-//get a reference to the 'Update settings' button
-
-// create a variables that will keep track of all the settings
-
-// create a variables that will keep track of all three totals.
-
-//add an event listener for when the 'Update settings' button is pressed
 
 
 const calculateBtn = document.querySelector(".calculateBtn");

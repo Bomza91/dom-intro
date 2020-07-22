@@ -24,7 +24,20 @@ describe("The text input bill factory function", function () {
 
         textBill.styleTotalColor(30);
 
-        assert.equal(0, textBill.getTotal());
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+    
+
+        assert.equal(30.25, textBill.getTotal());
 
     })
 
@@ -34,7 +47,35 @@ describe("The text input bill factory function", function () {
 
         textBill.styleTotalColor(50);
 
-        assert.equal(0, textBill.getTotal());
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('call');
+        textBill.billTotal('sms');
+        textBill.billTotal('sms');
+        textBill.billTotal('sms');
+        textBill.billTotal('sms');
+        textBill.billTotal('sms');
+        textBill.billTotal('sms');
+        textBill.billTotal('sms');
+        textBill.billTotal('sms');
+       
+       
+
+
+        assert.equal(50, textBill.getTotal());
 
     })
 
