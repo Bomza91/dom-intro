@@ -15,9 +15,9 @@ function calculateBtnClicked() {
 
 var billString = billStringFieldElem.value;
 
-var list = billString.split(',')
+// var list = billString.split(',')
 
-const roundedBillTotal = totalPhoneBill(list);
+const roundedBillTotal = totalPhoneBill(billString);
 
 billTotalElement.classList.remove("critical");
 billTotalElement.classList.remove("warning");
