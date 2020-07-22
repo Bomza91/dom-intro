@@ -41,7 +41,12 @@ function BillWithSettings() {
     }
 
     function makeCall() {
-       callCostTotal += theCallCost;
+
+        if(!hasReachedCriticalLevel()){
+
+            callCostTotal += theCallCost;
+    
+            }
     }
 
     function getTotalCost() {
@@ -57,7 +62,13 @@ function BillWithSettings() {
     }
 
     function sendSms() {
-       smsCostTotal += theSmsCost
+
+        if(!hasReachedCriticalLevel()){
+
+            smsCostTotal += theSmsCost
+    
+            }
+     
     }
 
     function hasReachedCriticalLevel() {
